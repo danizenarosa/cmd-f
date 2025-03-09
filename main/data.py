@@ -10,28 +10,26 @@ options = Options()
 options.headless = True  # Enable headless mode
 options.add_argument("--headless")
 
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Chrome(options = options)
 
 driver.get("https://courses.students.ubc.ca/browse-courses")
 
 # Navigate to table of courses
-body = driver.find_element(By.TAG_NAME, "body")
-dialog = body.find_element(By.CLASS_NAME, "dialog-off-canvas-main-canvas")
-page = dialog.find_element(By.CLASS_NAME, "l-page")
-main = page.find_element(By.ID, "main-content")
-content = main.find_element(By.CLASS_NAME, "l-page__content")
-div = content.find_element(By.TAG_NAME, "div")
-node = div.find_element(By.CLASS_NAME, "l-node")
-node_content = node.find_element(By.CLASS_NAME, "l-node__content")
-section = node_content.find_element(By.ID, "block-reactsubjectstable")
-subjects = section.find_element(By.ID, "subjects-table")
-div_two = subjects.find_element(By.TAG_NAME, "div")
-muibox = div_two.find_element(By.TAG_NAME, "div")
-muibox_two = WebDriverWait(muibox, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='subjects-table']/div/div/div[2]")))
+try:
 
-printing = muibox_two.get_attribute("class")
+    table = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, "/html/body/div[2]/div/main/div/div/div/div[3]/section/div/div/div/div[2]/div[2]/table/tbody")))
 
-print(printing)
+    printing = table.get_attribute("class")
 
-driver.quit()
+    print(printing)
+
+    rows = WebDriverWait(driver, 30).until(EC.visibility_of_all_elements_located((By.TAG_NAME, "tr")))
+
+    for x in rows:
+        tdprint = x.get_attribute("id")
+        print(tdprint)
+        
+
+finally:
+    driver.quit()
 
