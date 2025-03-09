@@ -2,8 +2,12 @@
 
 
 const Filters = () => {
+  function handleSubmit() {
+    
+  }
+
   return (
-    <form id="selectors" action="*** SEND TO BACKEND">
+    <form id="selectors" onSubmit={handleSubmit}>
       <input
         type="text"
         name="course_code"
@@ -35,6 +39,7 @@ const Filters = () => {
       min="09:00"
       step="30"
       />
+      <input type="submit"/>
     </form>
   );
 };
