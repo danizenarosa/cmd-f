@@ -4,9 +4,9 @@ from selenium import webdriver
 
 
 
-driver = webdriver.Chrome()  # Optional argument, if not specified will search path.
+driver = webdriver.Chrome('/path/to/chromedriver')  # Optional argument, if not specified will search path.
 
-driver.get('http://www.google.com/')
+driver.get('http://www.google.com/');
 
 time.sleep(5) # Let the user actually see something!
 
