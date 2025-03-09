@@ -1,5 +1,5 @@
 import CourseCard from "./CourseCard";
-import schedule from BACKEND;
+import axios from 'axios';
 
 const times_strings = ["8:00 am", 
               "8:30 am", 
@@ -58,7 +58,28 @@ const makeDaySched = () => {
 }
 
 const TimeTable = () => {
-  const day_schedules = schedule.schedules;
+  state = {
+    earliest : "",
+    latest : "",
+    days : [],
+  };
+
+  function componentDidMount() {
+    let data;
+
+    axios
+        .get("http://localhost:8000/course_data/")
+        .then((res) => {
+            data = res.data;
+            this.setState({
+                schedule: days,
+            });
+        })
+        .catch((err) => {});
+    };
+
+
+  const day_schedules = schedule.days;
   const times = times_strings.slice(schedule.earliest, schedule.latest + 1);
   return (
     <span>

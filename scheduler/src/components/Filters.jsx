@@ -8,7 +8,7 @@ const Filters = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const body = Object.fromEntries(formData);
-    fetch('http://localhost:8000/')
+    fetch('http://localhost:8000/course_data/')
   }
 
   const handleAddCourse = () => {
