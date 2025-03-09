@@ -4,7 +4,12 @@ import { useState } from "react";
 const Filters = () => {
   const [courseInputList, setCourseInput] = useState([{}]);
 
-  function handleSubmit() {}
+  function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const body = Object.fromEntries(formData);
+    fetch('http://localhost:4444/')
+  }
 
   const handleAddCourse = () => {
     setCourseInput([...courseInputList, {}]);
@@ -51,6 +56,7 @@ const Filters = () => {
         max="20:30"
         min="08:00"
         step="30"
+        value="08:00"
       />
       <label htmlFor="end_time">End Time</label>
       <input
@@ -60,6 +66,7 @@ const Filters = () => {
         max="21:30"
         min="09:00"
         step="30"
+        value="21:30"
       />
       <input type="submit" />
     </form>
